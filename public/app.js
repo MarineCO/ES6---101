@@ -1,6 +1,7 @@
 'use strict';
 
 var names = [];
+
 var clickBtn = document.getElementById('btn');
 
 clickBtn.addEventListener('click', function () {

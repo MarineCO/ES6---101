@@ -1,5 +1,6 @@
 
 let names = [];
+
 const clickBtn = document.getElementById('btn');
 
 clickBtn.addEventListener('click', () => {

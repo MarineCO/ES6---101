@@ -1,0 +1,7 @@
+.message, li {
+	text-transform: lowercase;
+}
+
+.message:first-letter, li:first-letter {
+	text-transform: capitalize;
+}
