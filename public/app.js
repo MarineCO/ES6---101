@@ -1,5 +1,6 @@
 'use strict';
 
+var names = [];
 var clickBtn = document.getElementById('btn');
 
 clickBtn.addEventListener('click', function () {
@@ -13,7 +14,14 @@ clickBtn.addEventListener('click', function () {
 
 	console.log(person);
 
-	var result = 'Bonjour ' + person;
+	var result = 'Bonjour ' + person + ' !';
 
 	document.getElementById('message').innerHTML = result;
+
+	var add = document.createElement('li');
+
+	document.body.appendChild(add).innerHTML = person;
+	names.push(person);
+
+	console.log(names);
 });

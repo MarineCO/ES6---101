@@ -1,4 +1,5 @@
 
+let names = [];
 const clickBtn = document.getElementById('btn');
 
 clickBtn.addEventListener('click', () => {
@@ -9,11 +10,19 @@ clickBtn.addEventListener('click', () => {
 	if (person === '') {
 		person = 'Père Noël';
 	}
-	
+
 	console.log(person);
 
-	const result = `Bonjour ${person}`;
+	const result = `Bonjour ${person} !`;
 
 	document.getElementById('message').innerHTML = result;
-});
 
+
+	let add = document.createElement('li')
+
+	document.body.appendChild(add).innerHTML = person;
+	names.push(person);
+
+	console.log(names);
+
+});
