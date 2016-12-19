@@ -6,6 +6,10 @@ clickBtn.addEventListener('click', () => {
 	let name = document.getElementById('data');
 	let person = name.value;
 
+	if (person === '') {
+		person = 'Père Noël';
+	}
+	
 	console.log(person);
 
 	const result = `Bonjour ${person}`;
