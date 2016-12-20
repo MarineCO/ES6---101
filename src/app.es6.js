@@ -1,29 +1,70 @@
+(() => {
 
-let names = [];
+	const app = {
 
-const clickBtn = document.getElementById('btn');
+		namesTab: [],
 
-clickBtn.addEventListener('click', () => {
+		clickBtn: document.getElementById('btn'),
 
-	let name = document.getElementById('data');
-	let person = name.value;
+		name: document.getElementById('data'),
 
-	if (person === '') {
-		person = 'Père Noël';
+		init() {
+			this.listeners();
+		},
+
+		listeners() {
+			app.clickBtn.addEventListener('click', () => {
+				this.writeMessage();
+			});
+		},
+
+		writeMessage() {
+			let person = app.name.value;
+
+			if (person === '') {
+				person = 'Père Noël';
+			}
+
+			console.log(person);
+			
+			const result = `Bonjour ${person} !`;
+			
+			document.getElementById('message').innerHTML = result;
+			
+			this.changeTextForm(person);
+		},
+
+		changeTextForm(person) {
+			const textChanged = person.charAt(0).toUpperCase() + person.slice(1).toLowerCase();
+			
+			this.addNametoTab(person, textChanged);
+		},
+
+		addNametoTab(person, textChanged) {
+			let add = document.createElement('li');
+			
+			document.body.appendChild(add).innerHTML = textChanged;
+			
+			app.namesTab.push(textChanged);
+
+			console.log(app.namesTab);
+		},
+
+		
+
+		// const clickBtn2 = document.getElementById('btn2');
+
+		// clickBtn2.addEventListener('click', () => {
+
+		// 	const searchInput = document.getElementById('search');
+		// 	const filter = searchInput.value.toUpperCase();
+		// 	const ul = document.getElementById('list');
+		// 	const li = document.getElementsByTagName('li');
+
+
+		// 	li.style.display = ""
+		// 	li.style.display = "none"
+		// });
 	}
-
-	console.log(person);
-
-	const result = `Bonjour ${person} !`;
-
-	document.getElementById('message').innerHTML = result;
-
-
-	let add = document.createElement('li')
-
-	document.body.appendChild(add).innerHTML = person;
-	names.push(person);
-
-	console.log(names);
-
-});
+	app.init();
+})();

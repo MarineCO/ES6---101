@@ -1,28 +1,54 @@
 'use strict';
 
-var names = [];
+(function () {
 
-var clickBtn = document.getElementById('btn');
+	var app = {
 
-clickBtn.addEventListener('click', function () {
+		namesTab: [],
 
-	var name = document.getElementById('data');
-	var person = name.value;
+		clickBtn: document.getElementById('btn'),
 
-	if (person === '') {
-		person = 'Père Noël';
-	}
+		name: document.getElementById('data'),
 
-	console.log(person);
+		init: function init() {
+			this.listeners();
+		},
+		listeners: function listeners() {
+			var _this = this;
 
-	var result = 'Bonjour ' + person + ' !';
+			app.clickBtn.addEventListener('click', function () {
+				_this.writeMessage();
+			});
+		},
+		writeMessage: function writeMessage() {
+			var person = app.name.value;
 
-	document.getElementById('message').innerHTML = result;
+			if (person === '') {
+				person = 'Père Noël';
+			}
 
-	var add = document.createElement('li');
+			console.log(person);
 
-	document.body.appendChild(add).innerHTML = person;
-	names.push(person);
+			var result = 'Bonjour ' + person + ' !';
 
-	console.log(names);
-});
+			document.getElementById('message').innerHTML = result;
+
+			this.changeTextForm(person);
+		},
+		changeTextForm: function changeTextForm(person) {
+			var textChanged = person.charAt(0).toUpperCase() + person.slice(1).toLowerCase();
+
+			this.addNametoTab(person, textChanged);
+		},
+		addNametoTab: function addNametoTab(person, textChanged) {
+			var add = document.createElement('li');
+
+			document.body.appendChild(add).innerHTML = textChanged;
+
+			app.namesTab.push(textChanged);
+
+			console.log(app.namesTab);
+		}
+	};
+	app.init();
+})();
