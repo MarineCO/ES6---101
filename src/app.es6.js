@@ -6,7 +6,11 @@
 
 		clickBtn: document.getElementById('btn'),
 
+		clickBtn2: document.getElementById('btn2'),
+
 		name: document.getElementById('data'),
+
+		ul: document.getElementById('list'),
 
 		init() {
 			this.listeners();
@@ -16,6 +20,9 @@
 			app.clickBtn.addEventListener('click', () => {
 				this.writeMessage();
 			});
+			app.clickBtn2.addEventListener('click', () => {
+				this.search();
+			});
 		},
 
 		writeMessage() {
@@ -24,8 +31,6 @@
 			if (person === '') {
 				person = 'Père Noël';
 			}
-
-			console.log(person);
 			
 			const result = `Bonjour ${person} !`;
 			
@@ -41,30 +46,41 @@
 		},
 
 		addNametoTab(person, textChanged) {
-			let add = document.createElement('li');
+			const add = document.createElement('li');
 			
-			document.body.appendChild(add).innerHTML = textChanged;
+			app.ul.appendChild(add).innerHTML = textChanged;
 			
 			app.namesTab.push(textChanged);
 
-			console.log(app.namesTab);
 		},
 
-		
+		search() {
+			let filterNamesTab = [];
+			const inputSearch = document.getElementById('search');
+			const getInput = inputSearch.value;
+			const lowerCaseInput = getInput.toLowerCase();
 
-		// const clickBtn2 = document.getElementById('btn2');
+			app.ul.innerHTML = '';
 
-		// clickBtn2.addEventListener('click', () => {
+			for (const i = 0; i < app.namesTab.length; i++) {
+				
+				const element = app.namesTab[i];
+				const lowercaseElement = element.toLowerCase();
+				const filter = lowercaseElement.indexOf(lowerCaseInput);
 
-		// 	const searchInput = document.getElementById('search');
-		// 	const filter = searchInput.value.toUpperCase();
-		// 	const ul = document.getElementById('list');
-		// 	const li = document.getElementsByTagName('li');
+				if (filter === 0) {
 
+					const result = document.createElement('li');
+					
+					result.innerHTML = element;
 
-		// 	li.style.display = ""
-		// 	li.style.display = "none"
-		// });
+					app.ul.appendChild(result);
+				}
+			}
+		},
 	}
+
 	app.init();
+
 })();
+

@@ -8,7 +8,11 @@
 
 		clickBtn: document.getElementById('btn'),
 
+		clickBtn2: document.getElementById('btn2'),
+
 		name: document.getElementById('data'),
+
+		ul: document.getElementById('list'),
 
 		init: function init() {
 			this.listeners();
@@ -19,6 +23,9 @@
 			app.clickBtn.addEventListener('click', function () {
 				_this.writeMessage();
 			});
+			app.clickBtn2.addEventListener('click', function () {
+				_this.search();
+			});
 		},
 		writeMessage: function writeMessage() {
 			var person = app.name.value;
@@ -26,8 +33,6 @@
 			if (person === '') {
 				person = 'Père Noël';
 			}
-
-			console.log(person);
 
 			var result = 'Bonjour ' + person + ' !';
 
@@ -43,12 +48,35 @@
 		addNametoTab: function addNametoTab(person, textChanged) {
 			var add = document.createElement('li');
 
-			document.body.appendChild(add).innerHTML = textChanged;
+			app.ul.appendChild(add).innerHTML = textChanged;
 
 			app.namesTab.push(textChanged);
+		},
+		search: function search() {
+			var filterNamesTab = [];
+			var inputSearch = document.getElementById('search');
+			var getInput = inputSearch.value;
+			var lowerCaseInput = getInput.toLowerCase();
 
-			console.log(app.namesTab);
+			app.ul.innerHTML = '';
+
+			for (var i = 0; i < app.namesTab.length; i++) {
+
+				var element = app.namesTab[i];
+				var lowercaseElement = element.toLowerCase();
+				var filter = lowercaseElement.indexOf(lowerCaseInput);
+
+				if (filter === 0) {
+
+					var result = document.createElement('li');
+
+					result.innerHTML = element;
+
+					app.ul.appendChild(result);
+				}
+			}
 		}
 	};
+
 	app.init();
 })();
